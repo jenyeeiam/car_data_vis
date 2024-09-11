@@ -16,7 +16,7 @@ model_counts_by_year_country = car_data.groupby(['Year_from', 'country_of_origin
 fig, ax = plt.subplots(figsize=(10, 8))
 
 def animate(frame):
-    year_index = frame // 5
+    year_index = frame // 3
     
     # Stop the animation if we've reached the end of the data
     if year_index >= len(model_counts_by_year_country):
@@ -24,7 +24,7 @@ def animate(frame):
         return
 
     ax.clear()
-    t = (frame % 5) / 5
+    t = (frame % 3) / 3
 
     if year_index == 0:
         prev_data = np.zeros_like(model_counts_by_year_country.iloc[0])
@@ -46,10 +46,10 @@ def animate(frame):
     ax.set_xlim(0, model_counts_by_year_country.values.max())  # Set fixed x-axis limit
 
 # Creating animation
-frames = len(model_counts_by_year_country) * 5 + 1  # Add 1 to ensure we reach the last frame
+frames = len(model_counts_by_year_country) * 3 + 1  # Add 1 to ensure we reach the last frame
 ani = FuncAnimation(fig, animate, frames=frames, repeat=False, interval=50)
 
 # To save the animation, uncomment the line below
-# ani.save('car_models_animation.mp4', writer='ffmpeg', dpi=80)
+ani.save('car_models_animation_grow_bars.mp4', writer='ffmpeg', dpi=80)
 
 plt.show()
